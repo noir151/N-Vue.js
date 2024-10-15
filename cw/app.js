@@ -9,16 +9,16 @@ new Vue({
       sortAttribute: 'subject',
       sortOrder: 'asc',
       lessons: [
-        { id: 1, subject: "Math", location: "London", price: 10000, spaces: 5, icon: "fas fa-calculator" },
-        { id: 2, subject: "English", location: "London", price: 12000, spaces: 5, icon: "fas fa-book" },
-        { id: 3, subject: "Science", location: "Oxford", price: 15000, spaces: 5, icon: "fas fa-flask" },
-        { id: 4, subject: "History", location: "Bristol", price: 9000, spaces: 5, icon: "fas fa-landmark" },
-        { id: 5, subject: "Music", location: "Bristol", price: 8000, spaces: 5, icon: "fas fa-music" },
-        { id: 6, subject: "Art", location: "York", price: 8500, spaces: 5, icon: "fas fa-paint-brush" },
-        { id: 7, subject: "Geography", location: "London", price: 9500, spaces: 5, icon: "fas fa-globe" },
-        { id: 8, subject: "PE", location: "Oxford", price: 11000, spaces: 5, icon: "fas fa-dumbbell" },
-        { id: 9, subject: "Math", location: "Oxford", price: 12000, spaces: 5, icon: "fas fa-calculator" },
-        { id: 10, subject: "English", location: "York", price: 10000, spaces: 5, icon: "fas fa-book" }
+       { id: 1, subject: "Math", location: "London", price: 10000, spaces: 5, image: "img/maths.png" },
+        { id: 2, subject: "English", location: "London", price: 12000, spaces: 5, image: "img/english.png" },
+        { id: 3, subject: "Science", location: "Oxford", price: 15000, spaces: 5, image: "img/science.png" },
+        { id: 4, subject: "History", location: "Bristol", price: 9000, spaces: 5, image: "img/history.png" },
+        { id: 5, subject: "Music", location: "Bristol", price: 8000, spaces: 5, image: "img/music.png" },
+        { id: 6, subject: "Art", location: "York", price: 8500, spaces: 5, image: "img/art.png" },
+        { id: 7, subject: "Geography", location: "London", price: 9500, spaces: 5, image: "img/geography.png" },
+        { id: 8, subject: "PE", location: "Oxford", price: 11000, spaces: 5, image: "img/pe.png" },
+        { id: 9, subject: "Math", location: "Oxford", price: 12000, spaces: 5, image: "img/maths.png" },
+        { id: 10, subject: "English", location: "York", price: 10000, spaces: 5, image: "img/english.png" }
       ]
     },
     computed: {
