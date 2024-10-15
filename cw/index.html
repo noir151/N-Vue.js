@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N! Learning</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ sitename }}</h1>
+    <button @click="toggleCart" :disabled="cart.length === 0">Cart ({{ cartItemCount }})</button>
+
+    <!-- Lesson List -->
+    <div v-if="!showCart">
+      <h2>Available Lessons</h2>
+      <div class="sort-section">
+        <label>Sort by:</label>
+        <select v-model="sortAttribute">
+          <option value="subject">Subject</option>
+          <option value="location">Location</option>
+          <option value="price">Price</option>
+          <option value="spaces">Spaces</option>
+        </select>
+        <label>
+          <input type="radio" v-model="sortOrder" value="asc"> Ascending
+        </label>
+        <label>
+          <input type="radio" v-model="sortOrder" value="desc"> Descending
+        </label>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 lesson" v-for="lesson in sortedLessons" :key="lesson.id">
+          <figure>
+            <i :class="lesson.icon"></i>
+            <figcaption>
+              <h3>{{ lesson.subject }}</h3>
+              <p>Location: {{ lesson.location }}</p>
+              <p>Price: {{ lesson.price | formatPrice }}</p>
+              <p>Spaces: {{ lesson.spaces }}</p>
+              <button class="btn btn-primary" @click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- Shopping Cart Section -->
+    <div v-if="showCart">
+      <h2>Your Cart</h2>
+      <ul>
+        <li v-for="lesson in cart" :key="lesson.id">
+          {{ lesson.subject }} - {{ lesson.price | formatPrice }}
+          <button @click="removeFromCart(lesson)">Remove</button>
+        </li>
+      </ul>
+      <p>Total: {{ cartTotal | formatPrice }}</p>
+
+      <form @submit.prevent="checkout">
+        <input type="text" v-model="name" placeholder="Your Name" @input="validateName">
+        <input type="text" v-model="phone" placeholder="Your Phone" @input="validatePhone">
+        <button :disabled="!canCheckout">Checkout</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
