@@ -48,6 +48,39 @@
       </div>
     </div>
 
+    <!-- Available Lessons -->
+      <div class="row">
+        <div class="col-md-4 lesson" v-for="lesson in availableLessons" :key="lesson.id">
+          <figure>
+            <img :src="lesson.image" alt="Lesson Icon" class="lesson-image">
+            <figcaption>
+              <h3>{{ lesson.subject }}</h3>
+              <p>Location: {{ lesson.location }}</p>
+              <p>Price: {{ lesson.price | formatPrice }}</p>
+              <p>Spaces: {{ lesson.spaces }}</p>
+              <button class="btn btn-primary" @click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    
+     <!-- Unavailable Lessons -->
+      <h2>Unavailable Lessons</h2>
+      <div class="row unavailable-section">
+        <div class="col-md-4 lesson unavailable" v-for="lesson in unavailableLessons" :key="lesson.id">
+          <figure>
+            <img :src="lesson.image" alt="Lesson Icon" class="lesson-image">
+            <figcaption>
+              <h3>{{ lesson.subject }}</h3>
+              <p>Location: {{ lesson.location }}</p>
+              <p>Price: {{ lesson.price | formatPrice }}</p>
+              <p class="no-spaces">No spaces available</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+    
     <!-- Shopping Cart Section -->
     <div v-if="showCart">
       <h2>Your Cart</h2>
@@ -59,6 +92,8 @@
       </ul>
       <p>Total: {{ cartTotal | formatPrice }}</p>
 
+      <button class="btn btn-secondary" @click="toggleCart">Back to Lessons</button>
+      
       <form @submit.prevent="checkout">
         <input type="text" v-model="name" placeholder="Your Name" @input="validateName">
         <input type="text" v-model="phone" placeholder="Your Phone" @input="validatePhone">
