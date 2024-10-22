@@ -36,6 +36,12 @@ new Vue({
           }
         });
       },
+      availableLessons() {
+        return this.sortedLessons.filter(lesson => lesson.spaces > 0);
+      },
+      unavailableLessons() {
+        return this.sortedLessons.filter(lesson => lesson.spaces === 0);
+      },
       cartItemCount() {
         return this.cart.length;
       },
