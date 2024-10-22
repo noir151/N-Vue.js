@@ -31,23 +31,6 @@
         </label>
       </div>
 
-      <div class="row">
-        <div class="col-md-4 lesson" v-for="lesson in sortedLessons" :key="lesson.id">
-          <figure>
-            <!-- Display Lesson Image -->
-            <img :src="lesson.image" :alt="lesson.subject + ' image'" class="lesson-image" />
-            <figcaption>
-              <h3>{{ lesson.subject }}</h3>
-              <p>Location: {{ lesson.location }}</p>
-              <p>Price: {{ lesson.price | formatPrice }}</p>
-              <p>Spaces: {{ lesson.spaces }}</p>
-              <button class="btn btn-primary" @click="addToCart(lesson)" :disabled="lesson.spaces === 0">Add to Cart</button>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
-    </div>
-
     <!-- Available Lessons -->
       <div class="row">
         <div class="col-md-4 lesson" v-for="lesson in availableLessons" :key="lesson.id">
