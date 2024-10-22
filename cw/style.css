@@ -87,7 +87,14 @@ body {
   .lesson:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
+
+/* Aligning the lessons in a row */
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Space lessons evenly */
+  }
+
   figure {
     display: flex;
     align-items: center;
@@ -116,7 +123,15 @@ body {
     font-size: 1rem;
     color: #555;
   }
-  
+
+/* Lesson Image */
+  .lesson-image {
+    width: 50px; /* Set a specific width */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add space between image and text */
+    vertical-align: middle; /* Align the image vertically */
+  }
+
   /* Lesson Buttons */
   .lesson button {
     font-size: 0.9rem;
@@ -210,13 +225,6 @@ body {
     }
   }
 
-  .lesson-image {
-    width: 50px; 
-    height: auto; 
-    margin-right: 10px; 
-    vertical-align: middle; 
-}
-
 /* Unavailable Section */
 .unavailable-section {
     margin-top: 30px;
@@ -232,13 +240,5 @@ body {
     font-weight: bold;
   }
 
-  .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-    margin-top: 20px;
-  }
   
-  .btn-secondary:hover {
-    background-color: #5a6268;
-  }
   
