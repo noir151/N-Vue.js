@@ -216,3 +216,29 @@ body {
     margin-right: 10px; 
     vertical-align: middle; 
 }
+
+/* Unavailable Section */
+.unavailable-section {
+    margin-top: 30px;
+  }
+  
+  .unavailable {
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+  }
+  
+  .unavailable .no-spaces {
+    color: #e74c3c;
+    font-weight: bold;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    margin-top: 20px;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
