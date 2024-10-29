@@ -240,5 +240,31 @@ body {
     font-weight: bold;
   }
 
-  
+  .search-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 150px; /* Adjust as needed */
+  top: 105px; /* Adjust as needed */
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  width: 200px;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
   
