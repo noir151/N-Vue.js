@@ -1,0 +1,270 @@
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f6;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 30px;
+}
+
+/* App Container */
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Buttons */
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Cart Button */
+button[disabled] {
+  background-color: #aaa;
+}
+
+/* Sorting Section */
+.sort-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.sort-section select, 
+.sort-section input[type="radio"] {
+  margin-left: 5px;
+}
+
+.sort-section label {
+  font-weight: 500;
+  color: #555;
+}
+
+/* Lesson Cards */
+.lesson {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  transition: box-shadow 0.3s ease;
+}
+
+.lesson:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Aligning the lessons in a row */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Space lessons evenly */
+}
+
+figure {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+}
+
+figure i {
+  font-size: 3rem;
+  color: #3498db;
+}
+
+figcaption {
+  padding-left: 20px;
+  max-width: 80%;
+}
+
+figcaption h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #34495e;
+}
+
+figcaption p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Lesson Image */
+.lesson-image {
+  width: 50px; /* Set a specific width */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 10px; /* Add space between image and text */
+  vertical-align: middle; /* Align the image vertically */
+}
+
+/* Lesson Buttons */
+.lesson button {
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.lesson button[disabled] {
+  background-color: #e74c3c;
+  color: white;
+  border-color: #e74c3c;
+}
+
+/* Cart Section */
+#app ul {
+  list-style: none;
+  padding: 0;
+}
+
+#app ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#app ul li button {
+  background-color: #e74c3c;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+#app p {
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+/* Total Price */
+.total-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2980b9;
+  margin-top: 10px;
+}
+
+/* Checkout Form */
+form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-top: 20px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+form button {
+  width: 100%;
+  background-color: #2ecc71;
+  color: white;
+}
+
+form button:disabled {
+  background-color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sort-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  figcaption {
+    padding-left: 0;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
+/* Unavailable Section */
+.unavailable-section {
+  margin-top: 30px;
+}
+
+.unavailable {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+}
+
+.unavailable .no-spaces {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 150px; /* Adjust as needed */
+  top: 105px; /* Adjust as needed */
+}
+
+.search-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  width: 200px;
+  font-size: 16px;
+}
+
+.search-button {
+  padding: 10px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+

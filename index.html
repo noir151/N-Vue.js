@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>N! Learning</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+ <div id="app">
+      <h1>{{ sitename }}</h1>
+      <button @click="toggleCart" :disabled="cart.length === 0">
+        Cart ({{ cartItemCount }})
+      </button>
+
+      <!-- Full-Text Search Input -->
+      <div class="search-container">
+        <input 
+          type="text" 
+          placeholder="Search..." 
+          v-model="searchQuery" 
+          class="search-input" 
+        />
+        <button class="search-button">Search</button>
+      </div>
+   
+    <!-- Lesson List -->
+    <div v-if="!showCart">
+      <h2>Available Lessons</h2>
+      <div class="sort-section">
+        <label>Sort by:</label>
+        <select v-model="sortAttribute">
+          <option value="subject">Subject</option>
+          <option value="location">Location</option>
+          <option value="price">Price</option>
+          <option value="spaces">Spaces</option>
+        </select>
+        <label>
+          <input type="radio" v-model="sortOrder" value="asc"> Ascending
+        </label>
+        <label>
+          <input type="radio" v-model="sortOrder" value="desc"> Descending
+        </label>
+      </div>
+
+    <!-- Available Lessons -->
+     <div class="row">
+          <div
+            class="col-md-4 lesson"
+            v-for="lesson in availableLessons"
+            :key="lesson.id"
+          >
+            <figure>
+              <img :src="lesson.image" alt="Lesson Icon" class="lesson-image" />
+              <figcaption>
+                <h3>{{ lesson.subject }}</h3>
+                <p>Location: {{ lesson.location }}</p>
+                <p>Price: {{ lesson.price | formatPrice }}</p>
+                <p>Spaces: {{ lesson.spaces }}</p>
+                <button
+                  class="btn btn-primary"
+                  @click="addToCart(lesson)"
+                  :disabled="lesson.spaces === 0"
+                >
+                  Add to Cart
+                </button>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+    
+     <!-- Unavailable Lessons -->
+       <h2>Unavailable Lessons</h2>
+        <div class="row unavailable-section">
+          <div
+            class="col-md-4 lesson unavailable"
+            v-for="lesson in unavailableLessons"
+            :key="lesson.id"
+          >
+            <figure>
+              <img :src="lesson.image" alt="Lesson Icon" class="lesson-image" />
+              <figcaption>
+                <h3>{{ lesson.subject }}</h3>
+                <p>Location: {{ lesson.location }}</p>
+                <p>Price: {{ lesson.price | formatPrice }}</p>
+                <p class="no-spaces">No spaces available</p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    
+    <!-- Shopping Cart Section -->
+    <div v-if="showCart">
+        <h2>Your Cart</h2>
+        <ul>
+          <li v-for="lesson in cart" :key="lesson.id">
+            {{ lesson.subject }} - {{ lesson.price | formatPrice }}
+            <button @click="removeFromCart(lesson)">Remove</button>
+          </li>
+        </ul>
+        <p>Total: {{ cartTotal | formatPrice }}</p>
+
+        <button class="btn btn-secondary" @click="toggleCart">
+          Back to Lessons
+        </button>
+
+        <form @submit.prevent="checkout">
+          <input
+            type="text"
+            v-model="name"
+            placeholder="Your Name"
+            @input="validateName"
+          />
+          <input
+            type="text"
+            v-model="phone"
+            placeholder="Your Phone"
+            @input="validatePhone"
+          />
+          <button @click="placeOrder" :disabled="!canCheckout">Checkout</button>
+        </form>
+      </div>
+    </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
