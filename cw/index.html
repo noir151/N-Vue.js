@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>N! Learning</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-</head>
-<body>
- <div id="app">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>N! Learning</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+  </head>
+  <body>
+    <div id="app">
       <h1>{{ sitename }}</h1>
       <button @click="toggleCart" :disabled="cart.length === 0">
         Cart ({{ cartItemCount }})
@@ -16,36 +16,35 @@
 
       <!-- Full-Text Search Input -->
       <div class="search-container">
-        <input 
-          type="text" 
-          placeholder="Search..." 
-          v-model="searchQuery" 
-          class="search-input" 
+        <input
+          type="text"
+          placeholder="Search..."
+          v-model="searchQuery"
+          class="search-input"
         />
-        <button class="search-button">Search</button>
-      </div>
-   
-    <!-- Lesson List -->
-    <div v-if="!showCart">
-      <h2>Available Lessons</h2>
-      <div class="sort-section">
-        <label>Sort by:</label>
-        <select v-model="sortAttribute">
-          <option value="subject">Subject</option>
-          <option value="location">Location</option>
-          <option value="price">Price</option>
-          <option value="spaces">Spaces</option>
-        </select>
-        <label>
-          <input type="radio" v-model="sortOrder" value="asc"> Ascending
-        </label>
-        <label>
-          <input type="radio" v-model="sortOrder" value="desc"> Descending
-        </label>
       </div>
 
-    <!-- Available Lessons -->
-     <div class="row">
+      <!-- Lesson List -->
+      <div v-if="!showCart">
+        <h2>Available Lessons</h2>
+        <div class="sort-section">
+          <label>Sort by:</label>
+          <select v-model="sortAttribute">
+            <option value="subject">Subject</option>
+            <option value="location">Location</option>
+            <option value="price">Price</option>
+            <option value="spaces">Spaces</option>
+          </select>
+          <label>
+            <input type="radio" v-model="sortOrder" value="asc" /> Ascending
+          </label>
+          <label>
+            <input type="radio" v-model="sortOrder" value="desc" /> Descending
+          </label>
+        </div>
+
+        <!-- Available Lessons -->
+        <div class="row">
           <div
             class="col-md-4 lesson"
             v-for="lesson in availableLessons"
@@ -69,9 +68,9 @@
             </figure>
           </div>
         </div>
-    
-     <!-- Unavailable Lessons -->
-       <h2>Unavailable Lessons</h2>
+
+        <!-- Unavailable Lessons -->
+        <h2>Unavailable Lessons</h2>
         <div class="row unavailable-section">
           <div
             class="col-md-4 lesson unavailable"
@@ -90,9 +89,9 @@
           </div>
         </div>
       </div>
-    
-    <!-- Shopping Cart Section -->
-    <div v-if="showCart">
+
+      <!-- Shopping Cart Section -->
+      <div v-if="showCart">
         <h2>Your Cart</h2>
         <ul>
           <li v-for="lesson in cart" :key="lesson.id">
@@ -106,6 +105,7 @@
           Back to Lessons
         </button>
 
+        <!-- Checkout Form -->
         <form @submit.prevent="checkout">
           <input
             type="text"
@@ -119,12 +119,11 @@
             placeholder="Your Phone"
             @input="validatePhone"
           />
-          <button :disabled="!canCheckout">Checkout</button>
+          <button @click="placeOrder" :disabled="!canCheckout">Checkout</button>
         </form>
       </div>
     </div>
-
-  <script src="app.js"></script>
-</body>
+    <!-- Link to the js -->
+    <script src="index.js"></script>
+  </body>
 </html>
-
