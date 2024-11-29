@@ -1,12 +1,14 @@
+// Creates Vue instance to control the app
 new Vue({
   el: "#app",
   data: {
+    //[------ Main data properties for the application ------ ]
     sitename: "N! Learning",
     showCart: false,
     cart: [],
     name: "",
     phone: "",
-    searchQuery: "", // New data property for search input
+    searchQuery: "", 
     sortAttribute: "subject",
     sortOrder: "asc",
     lessons: [
@@ -93,10 +95,13 @@ new Vue({
     ],
   },
   computed: {
+        // Computed properties to calculate values
+    //[------ Filters lessons based on the search query and sort them ------]
     filteredLessons() {
       const query = this.searchQuery.toLowerCase();
       return this.lessons
         .filter((lesson) => {
+            //[------ Matchs lessons against subject, location, or price ------]
           return (
             lesson.subject.toLowerCase().includes(query) ||
             lesson.location.toLowerCase().includes(query) ||
@@ -104,6 +109,7 @@ new Vue({
           );
         })
         .sort((a, b) => {
+          //[------ Sorts the lessons based on the selected attribute and order ------]
           let modifier = this.sortOrder === "asc" ? 1 : -1;
           if (this.sortAttribute === "subject") {
             return a.subject.localeCompare(b.subject) * modifier;
@@ -116,60 +122,67 @@ new Vue({
           }
         });
     },
+   //[------ Filters the lessons that have spaces------]
     availableLessons() {
       return this.filteredLessons.filter((lesson) => lesson.spaces > 0);
     },
+   //[------ Filters the lessons don't have spaces------]
     unavailableLessons() {
       return this.filteredLessons.filter((lesson) => lesson.spaces === 0);
     },
+   //[------ Calculates how many items in cart------]
     cartItemCount() {
       return this.cart.length;
     },
+   //[------ Calculates total price ------]
     cartTotal() {
       return this.cart.reduce((total, lesson) => total + lesson.price, 0);
     },
+   //[------ Verifies if user can checkout------]
     canCheckout() {
       return /^[A-Za-z\s]+$/.test(this.name) && /^[0-9]+$/.test(this.phone);
     },
   },
   methods: {
+    // Methods to handle user actions
+       
+    //[------ Shows/hides cart page ------]
     toggleCart() {
       this.showCart = !this.showCart;
     },
+    //[------ Adds lessons to cart------]
     addToCart(lesson) {
       if (lesson.spaces > 0) {
         this.cart.push(lesson);
-        lesson.spaces--; // Decrease available spaces for the added lesson
+        lesson.spaces--; 
       }
     },
+    //[------ Removes lessons from cart------]
     removeFromCart(lesson) {
       const index = this.cart.indexOf(lesson);
       if (index !== -1) {
-        this.cart.splice(index, 1); // Remove lesson from the cart
-        lesson.spaces++; // Increase available spaces for the removed lesson
+        this.cart.splice(index, 1); 
+        lesson.spaces++; 
       }
     },
     placeOrder() {
-      // Validate user input before sending order
-      if (!this.canCheckout) {
+   //[------ Verifies if user can checkout------]
+   if (!this.canCheckout) {
         alert("Please provide valid information.");
         return;
       }
-
-      // Prepare the lessons to be sent in the request
+   //[------ Prepares the lessons to be sent in the request------]
       const lessons = this.cart.map((lesson) => ({
         lessonId: lesson.id,
-        quantity: 1, // Assuming quantity of 1 for each lesson
+        quantity: 1, 
       }));
-
-      // Log the data to ensure it's correct
+   //[------ Logs the data to ensure it's correct------]
       console.log("Order data being sent:", {
         name: this.name,
         phone: this.phone,
         lessons: lessons,
       });
-
-      // Send POST request to the '/' endpoint (backend)
+   //[------ Sends POST request to the '/' endpoint (in backend)------]
       fetch("http://localhost:5000", {
         method: "POST",
         headers: {
@@ -178,7 +191,7 @@ new Vue({
         body: JSON.stringify({
           name: this.name,
           phone: this.phone,
-          lessons: lessons, // Include the lessons array here
+          lessons: lessons, 
         }),
       })
         .then((response) => {
@@ -188,19 +201,17 @@ new Vue({
           return response.json();
         })
         .then((data) => {
-          // Log the response data
+    //[------ Clears the cart and resets the form only after the order is successful------]
           console.log("Order created successfully:", data);
-
-          // Clear the cart and reset the form only after the order is successful
+    //[------ Logs the response data------]
           this.cart = [];
           this.name = "";
           this.phone = "";
 
-          // Show success message
           alert("Order submitted successfully!");
         })
         .catch((error) => {
-          // Handle any errors
+    //[------ Error handling ------]
           console.error("Error placing order:", error);
           alert("Failed to place the order. Please try again.");
         });
@@ -216,7 +227,7 @@ new Vue({
     },
   },
 });
-
+    //[------ DOMContentLoaded allows the fetchLessons call to run when the page is loaded ------]
 document.addEventListener("DOMContentLoaded", () => {
   fetchLessons();
 });
